@@ -142,6 +142,8 @@ class Gateway extends WC_Payment_Gateway
         } catch (Exception $e) {
             wc_add_notice($e->getMessage(), 'error');
         }
+
+        return null;
     }
 
     /**
@@ -292,7 +294,7 @@ class Gateway extends WC_Payment_Gateway
      */
     public function registerHooks()
     {
-        add_action( 'admin_enqueue_scripts', [$this, 'scripts']);
+        add_action('admin_enqueue_scripts', [$this, 'scripts']);
         add_filter('woocommerce_payment_gateways', [$this, 'register']);
         add_filter('woocommerce_api_process_simplepay_payment', [$this, 'handlePayment']);
         add_action("woocommerce_api_wc_gateway_{$this->id}", [$this, 'handleNotification']);
